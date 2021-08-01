@@ -1,0 +1,632 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"27 ./rtc.h
+[; ;./rtc.h: 27:     void ht1380write(unsigned char addr, unsigned char data);
+[v _ht1380write `(v ~T0 @X0 0 ef2`uc`uc ]
+"40
+[; ;./rtc.h: 40:     void rtcPutSeconds(unsigned char seconds);
+[v _rtcPutSeconds `(v ~T0 @X0 0 ef1`uc ]
+"30
+[; ;./rtc.h: 30:     unsigned char rtcGetSeconds(void);
+[v _rtcGetSeconds `(uc ~T0 @X0 0 ef ]
+"23 rtc.c
+[; ;rtc.c: 23: char de;
+[v _de `uc ~T0 @X0 1 e ]
+"46
+[; ;rtc.c: 46: void rtcInit() {
+[v _rtcInit `(v ~T0 @X0 1 ef ]
+{
+[e :U _rtcInit ]
+[f ]
+"48
+[; ;rtc.c: 48:     ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<5)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"49
+[; ;rtc.c: 49:     ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<4)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"50
+[; ;rtc.c: 50:     ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<3)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"51
+[; ;rtc.c: 51:  ht1380write(7, 0);
+[e ( _ht1380write (2 , -> -> 7 `i `uc -> -> 0 `i `uc ]
+"52
+[; ;rtc.c: 52:  rtcPutSeconds(rtcGetSeconds());
+[e ( _rtcPutSeconds (1 ( _rtcGetSeconds ..  ]
+"54
+[; ;rtc.c: 54: }
+[e :UE 1 ]
+}
+"55
+[; ;rtc.c: 55: void rtcStart() {
+[v _rtcStart `(v ~T0 @X0 1 ef ]
+{
+[e :U _rtcStart ]
+[f ]
+"57
+[; ;rtc.c: 57:    ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<5)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"58
+[; ;rtc.c: 58:    ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<4)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"59
+[; ;rtc.c: 59:    ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<3)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"60
+[; ;rtc.c: 60:    (((*(volatile __near unsigned char*)0xFF1)) &= ~(1<<7));
+[e =& *U -> -> 4081 `i `*VNuc -> ~ << -> 1 `i -> 7 `i `uc ]
+"61
+[; ;rtc.c: 61: }
+[e :UE 2 ]
+}
+"63
+[; ;rtc.c: 63: void writeByte(unsigned char dados) {
+[v _writeByte `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _writeByte ]
+[v _dados `uc ~T0 @X0 1 r1 ]
+[f ]
+"64
+[; ;rtc.c: 64:    unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
+"65
+[; ;rtc.c: 65:    for (i = 0; i < 8; i++) {
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 4  ]
+[e $U 5  ]
+[e :U 4 ]
+{
+"67
+[; ;rtc.c: 67:        if (dados & 0x01) {
+[e $ ! != & -> _dados `i -> 1 `i -> 0 `i 7  ]
+{
+"68
+[; ;rtc.c: 68:            ((((*(volatile __near unsigned char*)0xF82)) |= (1<<4)));
+[e =| *U -> -> 3970 `i `*VNuc -> << -> 1 `i -> 4 `i `uc ]
+"69
+[; ;rtc.c: 69:        } else {
+}
+[e $U 8  ]
+[e :U 7 ]
+{
+"70
+[; ;rtc.c: 70:            ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<4)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"71
+[; ;rtc.c: 71:        }
+}
+[e :U 8 ]
+"73
+[; ;rtc.c: 73:        dados >>= 1;
+[e =>> _dados -> -> 1 `i `uc ]
+"75
+[; ;rtc.c: 75:        ((((*(volatile __near unsigned char*)0xF82)) |= (1<<3)));
+[e =| *U -> -> 3970 `i `*VNuc -> << -> 1 `i -> 3 `i `uc ]
+"76
+[; ;rtc.c: 76:        for(de=0;de<100;de++);
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 9  ]
+[e $U 10  ]
+[e :U 9 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 9  ]
+[e :U 10 ]
+}
+"78
+[; ;rtc.c: 78:        ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<3)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"79
+[; ;rtc.c: 79:        for(de=0;de<100;de++);
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 12  ]
+[e $U 13  ]
+[e :U 12 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 12  ]
+[e :U 13 ]
+}
+"81
+[; ;rtc.c: 81:    }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 4  ]
+[e :U 5 ]
+}
+"82
+[; ;rtc.c: 82: }
+[e :UE 3 ]
+}
+"84
+[; ;rtc.c: 84: unsigned char readByte() {
+[v _readByte `(uc ~T0 @X0 1 ef ]
+{
+[e :U _readByte ]
+[f ]
+"85
+[; ;rtc.c: 85:    unsigned char i;
+[v _i `uc ~T0 @X0 1 a ]
+"86
+[; ;rtc.c: 86:    unsigned char dados;
+[v _dados `uc ~T0 @X0 1 a ]
+"87
+[; ;rtc.c: 87:    dados = 0;
+[e = _dados -> -> 0 `i `uc ]
+"88
+[; ;rtc.c: 88:    for (i = 0; i < 8; i++) {
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 16  ]
+[e $U 17  ]
+[e :U 16 ]
+{
+"89
+[; ;rtc.c: 89:        ((((*(volatile __near unsigned char*)0xF82)) |= (1<<3)));
+[e =| *U -> -> 3970 `i `*VNuc -> << -> 1 `i -> 3 `i `uc ]
+"90
+[; ;rtc.c: 90:        for(de=0;de<100;de++);
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 19  ]
+[e $U 20  ]
+[e :U 19 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 19  ]
+[e :U 20 ]
+}
+"92
+[; ;rtc.c: 92:        dados >>= 1;
+[e =>> _dados -> -> 1 `i `uc ]
+"94
+[; ;rtc.c: 94:        if (((((*(volatile __near unsigned char*)0xF82)) & (1<<4)))) {
+[e $ ! != & -> *U -> -> 3970 `i `*VNuc `i << -> 1 `i -> 4 `i -> 0 `i 22  ]
+{
+"95
+[; ;rtc.c: 95:            dados |= 0x80;
+[e =| _dados -> -> 128 `i `uc ]
+"96
+[; ;rtc.c: 96:        }
+}
+[e :U 22 ]
+"98
+[; ;rtc.c: 98:        ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<3)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"99
+[; ;rtc.c: 99:        for(de=0;de<100;de++);
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 23  ]
+[e $U 24  ]
+[e :U 23 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 23  ]
+[e :U 24 ]
+}
+"100
+[; ;rtc.c: 100:    }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 16  ]
+[e :U 17 ]
+}
+"101
+[; ;rtc.c: 101:    return dados;
+[e ) _dados ]
+[e $UE 15  ]
+"102
+[; ;rtc.c: 102: }
+[e :UE 15 ]
+}
+"104
+[; ;rtc.c: 104: void ht1380write(unsigned char addr, unsigned char dados) {
+[v _ht1380write `(v ~T0 @X0 1 ef2`uc`uc ]
+{
+[e :U _ht1380write ]
+[v _addr `uc ~T0 @X0 1 r1 ]
+[v _dados `uc ~T0 @X0 1 r2 ]
+[f ]
+"105
+[; ;rtc.c: 105:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<5)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"106
+[; ;rtc.c: 106:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<3)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"107
+[; ;rtc.c: 107:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<4)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"110
+[; ;rtc.c: 110:    ((((*(volatile __near unsigned char*)0xF82)) |= (1<<5)));
+[e =| *U -> -> 3970 `i `*VNuc -> << -> 1 `i -> 5 `i `uc ]
+"112
+[; ;rtc.c: 112:    addr <<= 1;
+[e =<< _addr -> -> 1 `i `uc ]
+"113
+[; ;rtc.c: 113:    addr |= 0x80;
+[e =| _addr -> -> 128 `i `uc ]
+"114
+[; ;rtc.c: 114:    writeByte(addr);
+[e ( _writeByte (1 _addr ]
+"115
+[; ;rtc.c: 115:    writeByte(dados);
+[e ( _writeByte (1 _dados ]
+"116
+[; ;rtc.c: 116:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<5)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"117
+[; ;rtc.c: 117:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<3)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"118
+[; ;rtc.c: 118:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<4)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"119
+[; ;rtc.c: 119: }
+[e :UE 26 ]
+}
+"121
+[; ;rtc.c: 121: unsigned char ht1380read(unsigned char addr) {
+[v _ht1380read `(uc ~T0 @X0 1 ef1`uc ]
+{
+[e :U _ht1380read ]
+[v _addr `uc ~T0 @X0 1 r1 ]
+[f ]
+"122
+[; ;rtc.c: 122:    unsigned char dados;
+[v _dados `uc ~T0 @X0 1 a ]
+"123
+[; ;rtc.c: 123:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<5)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"124
+[; ;rtc.c: 124:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<3)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"125
+[; ;rtc.c: 125:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<4)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"127
+[; ;rtc.c: 127:    ((((*(volatile __near unsigned char*)0xF82)) |= (1<<5)));
+[e =| *U -> -> 3970 `i `*VNuc -> << -> 1 `i -> 5 `i `uc ]
+"128
+[; ;rtc.c: 128:    addr <<= 1;
+[e =<< _addr -> -> 1 `i `uc ]
+"129
+[; ;rtc.c: 129:    addr |= 0x81;
+[e =| _addr -> -> 129 `i `uc ]
+"130
+[; ;rtc.c: 130:    writeByte(addr);
+[e ( _writeByte (1 _addr ]
+"131
+[; ;rtc.c: 131:    ((((*(volatile __near unsigned char*)0xF94)) |= (1<<4)));
+[e =| *U -> -> 3988 `i `*VNuc -> << -> 1 `i -> 4 `i `uc ]
+"132
+[; ;rtc.c: 132:    for(de=0;de<100;de++);for(de=0;de<100;de++);for(de=0;de<100;de++);for(de=0;de<100;de++);
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 28  ]
+[e $U 29  ]
+[e :U 28 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 28  ]
+[e :U 29 ]
+}
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 31  ]
+[e $U 32  ]
+[e :U 31 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 31  ]
+[e :U 32 ]
+}
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 34  ]
+[e $U 35  ]
+[e :U 34 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 34  ]
+[e :U 35 ]
+}
+{
+[e = _de -> -> 0 `i `uc ]
+[e $ < -> _de `i -> 100 `i 37  ]
+[e $U 38  ]
+[e :U 37 ]
+[e ++ _de -> -> 1 `i `uc ]
+[e $ < -> _de `i -> 100 `i 37  ]
+[e :U 38 ]
+}
+"133
+[; ;rtc.c: 133:    dados = readByte();
+[e = _dados ( _readByte ..  ]
+"134
+[; ;rtc.c: 134:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<5)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"135
+[; ;rtc.c: 135:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<3)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"136
+[; ;rtc.c: 136:    ((((*(volatile __near unsigned char*)0xF82)) &= ~(1<<4)));
+[e =& *U -> -> 3970 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"137
+[; ;rtc.c: 137:    ((((*(volatile __near unsigned char*)0xF94)) &= ~(1<<4)));
+[e =& *U -> -> 3988 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"138
+[; ;rtc.c: 138:    return dados;
+[e ) _dados ]
+[e $UE 27  ]
+"139
+[; ;rtc.c: 139: }
+[e :UE 27 ]
+}
+"141
+[; ;rtc.c: 141: void rtcSetDateTime(void) {
+[v _rtcSetDateTime `(v ~T0 @X0 1 ef ]
+{
+[e :U _rtcSetDateTime ]
+[f ]
+"143
+[; ;rtc.c: 143:    ht1380write(7, 0);
+[e ( _ht1380write (2 , -> -> 7 `i `uc -> -> 0 `i `uc ]
+"144
+[; ;rtc.c: 144:    ht1380write(0, 0x0);
+[e ( _ht1380write (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"145
+[; ;rtc.c: 145:    ht1380write(1, 0x21);
+[e ( _ht1380write (2 , -> -> 1 `i `uc -> -> 33 `i `uc ]
+"146
+[; ;rtc.c: 146:    ht1380write(2, 0x23);
+[e ( _ht1380write (2 , -> -> 2 `i `uc -> -> 35 `i `uc ]
+"147
+[; ;rtc.c: 147:    ht1380write(3, 0x28);
+[e ( _ht1380write (2 , -> -> 3 `i `uc -> -> 40 `i `uc ]
+"148
+[; ;rtc.c: 148:    ht1380write(4, 0x10);
+[e ( _ht1380write (2 , -> -> 4 `i `uc -> -> 16 `i `uc ]
+"149
+[; ;rtc.c: 149:    ht1380write(5, 0x6);
+[e ( _ht1380write (2 , -> -> 5 `i `uc -> -> 6 `i `uc ]
+"150
+[; ;rtc.c: 150:    ht1380write(6, 0x12);
+[e ( _ht1380write (2 , -> -> 6 `i `uc -> -> 18 `i `uc ]
+"151
+[; ;rtc.c: 151: }
+[e :UE 40 ]
+}
+"153
+[; ;rtc.c: 153: unsigned char rtcGetSeconds(void) {
+[v _rtcGetSeconds `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetSeconds ]
+[f ]
+"154
+[; ;rtc.c: 154:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"155
+[; ;rtc.c: 155:    value = ht1380read(0);
+[e = _value ( _ht1380read (1 -> -> 0 `i `uc ]
+"156
+[; ;rtc.c: 156:    return (((value >> 4)&0x07)*10 + (value & 0x0f));
+[e ) -> + * & >> -> _value `i -> 4 `i -> 7 `i -> 10 `i & -> _value `i -> 15 `i `uc ]
+[e $UE 41  ]
+"158
+[; ;rtc.c: 158: }
+[e :UE 41 ]
+}
+"160
+[; ;rtc.c: 160: unsigned char rtcGetMinutes(void) {
+[v _rtcGetMinutes `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetMinutes ]
+[f ]
+"161
+[; ;rtc.c: 161:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"162
+[; ;rtc.c: 162:    value = ht1380read(1);
+[e = _value ( _ht1380read (1 -> -> 1 `i `uc ]
+"163
+[; ;rtc.c: 163:    return (((value >> 4)&0x07)*10 + (value & 0x0f));
+[e ) -> + * & >> -> _value `i -> 4 `i -> 7 `i -> 10 `i & -> _value `i -> 15 `i `uc ]
+[e $UE 42  ]
+"164
+[; ;rtc.c: 164: }
+[e :UE 42 ]
+}
+"166
+[; ;rtc.c: 166: unsigned char rtcGetHours(void) {
+[v _rtcGetHours `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetHours ]
+[f ]
+"167
+[; ;rtc.c: 167:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"168
+[; ;rtc.c: 168:    value = ht1380read(2);
+[e = _value ( _ht1380read (1 -> -> 2 `i `uc ]
+"169
+[; ;rtc.c: 169:    return (((value >> 4)&0x03)*10 + (value & 0x0f));
+[e ) -> + * & >> -> _value `i -> 4 `i -> 3 `i -> 10 `i & -> _value `i -> 15 `i `uc ]
+[e $UE 43  ]
+"170
+[; ;rtc.c: 170: }
+[e :UE 43 ]
+}
+"172
+[; ;rtc.c: 172: unsigned char rtcGetDate(void) {
+[v _rtcGetDate `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetDate ]
+[f ]
+"173
+[; ;rtc.c: 173:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"174
+[; ;rtc.c: 174:    value = ht1380read(3);
+[e = _value ( _ht1380read (1 -> -> 3 `i `uc ]
+"175
+[; ;rtc.c: 175:    return (((value >> 4)&0x03)*10 + (value & 0x0f));
+[e ) -> + * & >> -> _value `i -> 4 `i -> 3 `i -> 10 `i & -> _value `i -> 15 `i `uc ]
+[e $UE 44  ]
+"176
+[; ;rtc.c: 176: }
+[e :UE 44 ]
+}
+"178
+[; ;rtc.c: 178: unsigned char rtcGetMonth(void) {
+[v _rtcGetMonth `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetMonth ]
+[f ]
+"179
+[; ;rtc.c: 179:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"180
+[; ;rtc.c: 180:    value = ht1380read(4);
+[e = _value ( _ht1380read (1 -> -> 4 `i `uc ]
+"181
+[; ;rtc.c: 181:    return (((value >> 4)&0x01)*10 + (value & 0x0f));
+[e ) -> + * & >> -> _value `i -> 4 `i -> 1 `i -> 10 `i & -> _value `i -> 15 `i `uc ]
+[e $UE 45  ]
+"182
+[; ;rtc.c: 182: }
+[e :UE 45 ]
+}
+"184
+[; ;rtc.c: 184: unsigned char rtcGetYear(void) {
+[v _rtcGetYear `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetYear ]
+[f ]
+"185
+[; ;rtc.c: 185:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"186
+[; ;rtc.c: 186:    value = ht1380read(6);
+[e = _value ( _ht1380read (1 -> -> 6 `i `uc ]
+"187
+[; ;rtc.c: 187:    return (((value >> 4)&0x0f)*10 + (value & 0x0f));
+[e ) -> + * & >> -> _value `i -> 4 `i -> 15 `i -> 10 `i & -> _value `i -> 15 `i `uc ]
+[e $UE 46  ]
+"188
+[; ;rtc.c: 188: }
+[e :UE 46 ]
+}
+"190
+[; ;rtc.c: 190: unsigned char rtcGetDay(void) {
+[v _rtcGetDay `(uc ~T0 @X0 1 ef ]
+{
+[e :U _rtcGetDay ]
+[f ]
+"191
+[; ;rtc.c: 191:    unsigned char value;
+[v _value `uc ~T0 @X0 1 a ]
+"192
+[; ;rtc.c: 192:    value = ht1380read(5);
+[e = _value ( _ht1380read (1 -> -> 5 `i `uc ]
+"193
+[; ;rtc.c: 193:    return (value & 0x0f);
+[e ) -> & -> _value `i -> 15 `i `uc ]
+[e $UE 47  ]
+"194
+[; ;rtc.c: 194: }
+[e :UE 47 ]
+}
+"206
+[; ;rtc.c: 206: void rtcPutSeconds(unsigned char seconds) {
+[v _rtcPutSeconds `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutSeconds ]
+[v _seconds `uc ~T0 @X0 1 r1 ]
+[f ]
+"207
+[; ;rtc.c: 207:    ht1380write(0, (seconds % 10) | ((seconds / 10) << 4));
+[e ( _ht1380write (2 , -> -> 0 `i `uc -> | % -> _seconds `i -> 10 `i << / -> _seconds `i -> 10 `i -> 4 `i `uc ]
+"208
+[; ;rtc.c: 208: }
+[e :UE 48 ]
+}
+"210
+[; ;rtc.c: 210: void rtcPutMinutes(unsigned char minutes) {
+[v _rtcPutMinutes `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutMinutes ]
+[v _minutes `uc ~T0 @X0 1 r1 ]
+[f ]
+"211
+[; ;rtc.c: 211:    ht1380write(1, (minutes % 10) | ((minutes / 10) << 4));
+[e ( _ht1380write (2 , -> -> 1 `i `uc -> | % -> _minutes `i -> 10 `i << / -> _minutes `i -> 10 `i -> 4 `i `uc ]
+"212
+[; ;rtc.c: 212: }
+[e :UE 49 ]
+}
+"214
+[; ;rtc.c: 214: void rtcPutHours(unsigned char hours) {
+[v _rtcPutHours `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutHours ]
+[v _hours `uc ~T0 @X0 1 r1 ]
+[f ]
+"215
+[; ;rtc.c: 215:    ht1380write(2, (hours % 10) | ((hours / 10) << 4));
+[e ( _ht1380write (2 , -> -> 2 `i `uc -> | % -> _hours `i -> 10 `i << / -> _hours `i -> 10 `i -> 4 `i `uc ]
+"216
+[; ;rtc.c: 216: }
+[e :UE 50 ]
+}
+"218
+[; ;rtc.c: 218: void rtcPutDate(unsigned char date) {
+[v _rtcPutDate `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutDate ]
+[v _date `uc ~T0 @X0 1 r1 ]
+[f ]
+"219
+[; ;rtc.c: 219:    ht1380write(3, (date % 10) | ((date / 10) << 4));
+[e ( _ht1380write (2 , -> -> 3 `i `uc -> | % -> _date `i -> 10 `i << / -> _date `i -> 10 `i -> 4 `i `uc ]
+"220
+[; ;rtc.c: 220: }
+[e :UE 51 ]
+}
+"222
+[; ;rtc.c: 222: void rtcPutMonth(unsigned char month) {
+[v _rtcPutMonth `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutMonth ]
+[v _month `uc ~T0 @X0 1 r1 ]
+[f ]
+"223
+[; ;rtc.c: 223:    ht1380write(4, (month % 10) | ((month / 10) << 4));
+[e ( _ht1380write (2 , -> -> 4 `i `uc -> | % -> _month `i -> 10 `i << / -> _month `i -> 10 `i -> 4 `i `uc ]
+"224
+[; ;rtc.c: 224: }
+[e :UE 52 ]
+}
+"226
+[; ;rtc.c: 226: void rtcPutDay(unsigned char day) {
+[v _rtcPutDay `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutDay ]
+[v _day `uc ~T0 @X0 1 r1 ]
+[f ]
+"227
+[; ;rtc.c: 227:    ht1380write(5, day);
+[e ( _ht1380write (2 , -> -> 5 `i `uc _day ]
+"228
+[; ;rtc.c: 228: }
+[e :UE 53 ]
+}
+"230
+[; ;rtc.c: 230: void rtcPutYear(unsigned char year) {
+[v _rtcPutYear `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _rtcPutYear ]
+[v _year `uc ~T0 @X0 1 r1 ]
+[f ]
+"231
+[; ;rtc.c: 231:    ht1380write(6, (year % 10) | ((year / 10) << 4));
+[e ( _ht1380write (2 , -> -> 6 `i `uc -> | % -> _year `i -> 10 `i << / -> _year `i -> 10 `i -> 4 `i `uc ]
+"232
+[; ;rtc.c: 232: }
+[e :UE 54 ]
+}
